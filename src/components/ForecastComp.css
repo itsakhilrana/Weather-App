@@ -1,0 +1,53 @@
+.forecastComp {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+}
+
+.forecastDays {
+  background-color: rgba(210, 214, 249, 0.233);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  margin-left: 0px;
+  margin-right: 10px;
+}
+.forecastDays img {
+  width: 80px;
+  height: 80px;
+  margin-right: 25px;
+}
+.forecastDays .day {
+  font-size: 16px;
+}
+.forecastDays .tempDay {
+  font-size: 30px;
+  position: relative;
+}
+
+.forecastDays .tempDay span {
+  top: 0;
+  font-size: 12px;
+  position: absolute;
+}
+
+.sevenDaysForecast::-webkit-scrollbar {
+  display: none;
+}
+
+@media only screen and (max-width: 730px) {
+  .sevenDaysForecast {
+    margin-top: 30px;
+  }
+
+  .forecastDays {
+    background-color: rgba(210, 214, 249, 0.233);
+
+    margin-left: 0px;
+  }
+}
