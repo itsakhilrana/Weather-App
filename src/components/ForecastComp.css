@@ -29,6 +29,7 @@
 
 .morning{
   font-size: 12px;
+  margin-bottom: 4px;
  
 }
 .forecastDays img {
@@ -38,10 +39,12 @@
 }
 .forecastDays .day {
   font-size: 12px;
+  font-weight: 500;
 }
 .forecastDays .tempDay {
   
-  font-size: 20px;
+  font-size: 14px;
+  font-weight: bold;
   position: relative;
 }
 

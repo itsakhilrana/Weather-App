@@ -1,0 +1,8 @@
+.fourOfourScreen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+color: rgba(240, 240, 240, 0.849);
+  margin-top: -50px;
+}

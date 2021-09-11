@@ -6,7 +6,7 @@ import { globalStore } from '../App'
 import './ForecastComp.css'
 
 const ForecastComp = () => {
-  const weatherDetails = useContext(globalStore)
+  const {weatherDetails} = useContext(globalStore)
   const { daily } = weatherDetails
 
   const days = [
@@ -36,7 +36,7 @@ const ForecastComp = () => {
             ></img>
           </div>
 
-          <div>
+          <div style={{marginRight:"10px"}}>
             <div className="nightContainer">
               <p className="night">Night- </p>
               <p className="tempDay">

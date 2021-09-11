@@ -17,22 +17,23 @@ function App() {
   const [theme, setTheme] = useState(true)
   const [pos, setPos] = useState({ lat: '', long: '' })
   const [query, setQuery] = useState('')
+  const [queryHandler, setQueryHandler] = useState({})
 
   console.log(query)
-
+  console.log('queryHandler', queryHandler)
 
   let initState = {
-    timezone: 'Timezone',
+    timezone: 'timezone',
     current: {
       dt: 'datetime',
-      temp: 'temp',
+      temp: 'Loading..',
       pressure: 'pressure',
       humidity: 'humidity',
       wind_speed: 'wind',
-      weather: [{ description: 'cluds', icon: 'icon' }],
+      weather: [{ description: 'enable your location', icon: 'icon' }],
     },
-    hourly:[],
-    daily:[]
+    hourly: [{temp:"00", dt:"00", weather:[{icon:"0"}]}],
+    daily: [{temp:{night:"00",day:"00"}}],
   }
   const [weatherDetails, setweatherDetails] = useState(initState)
 
@@ -49,37 +50,48 @@ function App() {
 
   const fetchWeather = async () => {
     try {
-      if(!query){
-
-        if(!pos.lat){
-          await window.navigator.geolocation.getCurrentPosition(savePositionToState)
+      if (!query) {
+        if (!pos.lat) {
+          await window.navigator.geolocation.getCurrentPosition(
+            savePositionToState
+          )
         }
-        
 
-      const { data } = await axios.get(URL, {
-        params: {
-          lat: pos.lat,
-          lon: pos.long,
-          exclude: 'minutely',
-          units: 'metric',
-          APPID: API_KEY,
-        },
-      })
-      setweatherDetails(data)
-      }else{
-
-        const { data } = await axios.get(URL2, {
+        const { data } = await axios.get(URL, {
           params: {
-            q: query,
+            lat: pos.lat,
+            lon: pos.long,
+            exclude: 'minutely',
+            units: 'metric',
             APPID: API_KEY,
           },
         })
+        setweatherDetails(data)
+      } else {
+        console.log('else excute')
 
-        setPos({
-          lat: data.coord.lat,
-          long: data.coord.lon,
-        })
-        setQuery("")
+        await axios
+          .get(URL2, {
+            params: {
+              q: query,
+              APPID: API_KEY,
+            },
+          })
+          .then(({ data }) => {
+            // console.log(data)
+            setPos({
+              lat: data.coord.lat,
+              long: data.coord.lon,
+            })
+            setQuery('')
+            setQueryHandler({ cityName: data.name })
+          })
+          .catch((err) => {
+            console.log(err.message)
+            setQueryHandler({ error: 'city not found' })
+          })
+
+        // console.log(data.coord.lat)
       }
     } catch (err) {
       console.error(err)
@@ -88,11 +100,19 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
-  }, [pos.lat, pos.long,query])
+  }, [pos.lat, pos.long, query])
 
+  //#171A1F
   return (
-    <div className="App" style={theme ? {backgroundColor:"#1F2052"} : {backgroundColor:"black"}}>
-      <globalStore.Provider value={weatherDetails}>
+    <div
+      className="App"
+      style={
+        theme ? { backgroundColor: '#7073ff' } : { backgroundColor: '#171A1F' }
+      }
+    >
+      <globalStore.Provider
+        value={{ weatherDetails: weatherDetails, queryHandler: queryHandler }}
+      >
         <Router>
           <NavbarComp query={(val) => setQuery(val)} />
           <Switch>
@@ -103,9 +123,9 @@ function App() {
           </Switch>
 
           <BottomNavbarComp
-          show={view}
-          theme={theme}
-          mytheme = {(theme) =>setTheme(theme)}
+            show={view}
+            theme={theme}
+            mytheme={(theme) => setTheme(theme)}
             hourly={(view) => setView(view)}
             forecast={(view) => setView(view)}
           />

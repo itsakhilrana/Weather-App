@@ -4,10 +4,13 @@
     align-items: center;
   }
   
-  .header p{
+  .header .webName{
     font-size: 18px;
     width: 50%;
+    color: inherit;
+    font-weight: bold;
   }
+
   
   
   input:focus {
@@ -15,20 +18,22 @@
   }
   
   input::placeholder {
-    color: white;
+    color: rgba(240, 248, 255, 0.459);
   }
   
   .searchContainer{
     width: 50%;
     display: flex;
+    flex-direction: column;
     justify-content: end;
     
   }
   input {
-    border: 1px solid aliceblue;
+    border: none;
+    border-bottom: 1px solid rgba(240, 248, 255, 0.856);
     border-radius: 5px;
-    width: 60%;
-    height: 40px;
+    width: 80%;
+    height: 30px;
     padding: 5px;
     background: transparent;
     color: #f3f4f6;
@@ -37,11 +42,11 @@
   
   button {
     background-color: rgba(240, 248, 255, 0.459);
-    height: 40px;
+    height: 30px;
     border: none;
     padding: 5px;
-    width: 30%;
+    width: 20%;
     color: aliceblue;
     border-radius: 5px;
-    
+    cursor: pointer;
   }

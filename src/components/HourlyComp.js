@@ -7,12 +7,12 @@ import { globalStore } from '../App'
 import './HourlyComp.css'
 
 const HoursComp = () => {
-  const weatherDetails = useContext(globalStore)
+  const {weatherDetails} = useContext(globalStore)
 
   let { hourly } = weatherDetails
   return (
     <div className="hourlyComp">
-      <p>48 hours</p>
+      <p className="title">48 hours</p>
       <div className="hourlyForecast">
         {hourly.map((val, index) => (
           <div className="hourlyCard" key={index}>
@@ -22,11 +22,12 @@ const HoursComp = () => {
               src={`http://openweathermap.org/img/wn/${val.weather[0].icon}@4x.png`}
             ></img>
             <div>
+              
+              <p className="hourlyTemp">{val.temp}<span className="symbol">&#176;C</span></p>
               <p className="hourlyTime">
                 {moment(val.dt * 1000).format('HH:mm a')}
               </p>
-              <p className="hourlyTemp">{val.temp}<span className="symbol">&#176;C</span>
-              </p>
+              
             </div>
           </div>
         ))}

@@ -6,7 +6,8 @@ import { globalStore } from '../App'
 import './WeatherComp.css'
 
 const WeatherComp = () => {
-  const weatherDetails = useContext(globalStore)
+  const {weatherDetails, queryHandler} = useContext(globalStore)
+  console.log(weatherDetails)
   let { timezone, current } = weatherDetails
 
   const days = [
@@ -40,7 +41,7 @@ const WeatherComp = () => {
   return (
     <div className="weatherComp">
       <div className="locationContainer">
-        <p className="location">{timezone}</p>
+        <p className="location">{queryHandler.cityName ? queryHandler.cityName : timezone}</p>
       </div>
 
       <div className="dtContainer">

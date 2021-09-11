@@ -8,28 +8,31 @@
     bottom: 0;
     transform: translate(-50%, 0%);
     
-    
-    background-color: rgba(240, 248, 255, 0.575);
+    color: #171A1F;
+    background-color: aliceblue;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
 
-  .hours{
-    background-color: yellow;
+  .active{
+    background-color: rgba(7, 7, 7, 0.158);
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-weight: bold;
+    
   }
 
-  .nohours{
+  .noactive{
     background-color: none;
+    cursor: pointer;
+    font-weight: 500;
   }
 
-  .days{
-    background-color: yellow;
+  .theme{
+    cursor: pointer;
   }
 
-  .nodays{
-    background-color: none;
-  }
 
 
   @media only screen and (max-width: 730px) {
@@ -40,7 +43,7 @@
       height: 70px;
       
      
-      background-color: rgba(240, 248, 255, 0.575);
+    
       display: flex;
       justify-content: space-around;
       align-items: center;
