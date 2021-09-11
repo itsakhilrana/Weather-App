@@ -1,36 +1,38 @@
-import React from 'react'
+import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
+import { globalStore } from '../App'
 //Css
 import './BottomNavbarComp.css'
 
 const BottomNavbarComp = (props) => {
   const history = useHistory()
-
-  console.log(props.show)
+  const { appTheme, appView } = useContext(globalStore)
+  const [theme, setTheme] = appTheme
+  const [view, setView] = appView
 
   return (
     <div className="bottomNavbarComp">
       <div
-        className={props.show ? 'active' : 'noactive'}
+        className={view ? 'active' : 'noactive'}
         onClick={() => {
-          props.hourly(true)
+          setView(true)
           history.push('/')
         }}
       >
         48 Hours
       </div>
       <div
-        className={!props.show ? 'active' : 'noactive'}
+        className={!view ? 'active' : 'noactive'}
         onClick={() => {
-          props.forecast(false)
-          history.push("/")
+          setView(false)
+          history.push('/')
         }}
       >
         7 Days
       </div>
-      <div className="theme" onClick={() => props.mytheme(!props.theme)}>
-        {props.theme ? <FaSun size="1.5em" /> : <FaMoon size="1.5em" />}
+      <div className="theme" onClick={() => setTheme(!theme)}>
+        {theme ? <FaSun size="1.5em" /> : <FaMoon size="1.5em" />}
       </div>
     </div>
   )

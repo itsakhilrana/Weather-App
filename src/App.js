@@ -1,8 +1,11 @@
-import React, { useState, useEffect, createContext } from 'react'
-import axios from 'axios'
+import { useState, useEffect, createContext } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+//Helpers
+import { initState, API_KEY, URL, URL2 } from './helpers/helpers'
+//Api's
+import { fetchWeather } from './api/weatherApi'
 //Components
 import NavbarComp from './components/NavbarComp'
 import BottomNavbarComp from './components/BottomNavbarComp'
@@ -10,32 +13,22 @@ import BottomNavbarComp from './components/BottomNavbarComp'
 import HomeScreen from './screens/HomeScreen'
 import FourOFourScreen from './screens/FourOFourScreen'
 
+//global state of App
 export const globalStore = createContext()
 
 function App() {
-  const [view, setView] = useState(true)
-  const [theme, setTheme] = useState(true)
+  //weather related states
+  const [weatherDetails, setweatherDetails] = useState(initState)
   const [pos, setPos] = useState({ lat: '', long: '' })
   const [query, setQuery] = useState('')
   const [queryHandler, setQueryHandler] = useState({})
 
+  //toggles
+  const [view, setView] = useState(true)
+  const [theme, setTheme] = useState(true)
+
   console.log(query)
   console.log('queryHandler', queryHandler)
-
-  let initState = {
-    timezone: 'timezone',
-    current: {
-      dt: 'datetime',
-      temp: 'Loading..',
-      pressure: 'pressure',
-      humidity: 'humidity',
-      wind_speed: 'wind',
-      weather: [{ description: 'enable your location', icon: 'icon' }],
-    },
-    hourly: [{temp:"00", dt:"00", weather:[{icon:"0"}]}],
-    daily: [{temp:{night:"00",day:"00"}}],
-  }
-  const [weatherDetails, setweatherDetails] = useState(initState)
 
   const savePositionToState = async (position) => {
     setPos({
@@ -44,65 +37,21 @@ function App() {
     })
   }
 
-  const URL = 'https://api.openweathermap.org/data/2.5/onecall'
-  const URL2 = 'https://api.openweathermap.org/data/2.5/weather'
-  const API_KEY = '529cac661d57d3580cfefb96049ce565'
-
-  const fetchWeather = async () => {
-    try {
-      if (!query) {
-        if (!pos.lat) {
-          await window.navigator.geolocation.getCurrentPosition(
-            savePositionToState
-          )
-        }
-
-        const { data } = await axios.get(URL, {
-          params: {
-            lat: pos.lat,
-            lon: pos.long,
-            exclude: 'minutely',
-            units: 'metric',
-            APPID: API_KEY,
-          },
-        })
-        setweatherDetails(data)
-      } else {
-        console.log('else excute')
-
-        await axios
-          .get(URL2, {
-            params: {
-              q: query,
-              APPID: API_KEY,
-            },
-          })
-          .then(({ data }) => {
-            // console.log(data)
-            setPos({
-              lat: data.coord.lat,
-              long: data.coord.lon,
-            })
-            setQuery('')
-            setQueryHandler({ cityName: data.name })
-          })
-          .catch((err) => {
-            console.log(err.message)
-            setQueryHandler({ error: 'city not found' })
-          })
-
-        // console.log(data.coord.lat)
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   useEffect(() => {
-    fetchWeather()
+    fetchWeather(
+      savePositionToState,
+      pos,
+      setPos,
+      setweatherDetails,
+      API_KEY,
+      URL,
+      URL2,
+      query,
+      setQuery,
+      setQueryHandler
+    )
   }, [pos.lat, pos.long, query])
 
-  //#171A1F
   return (
     <div
       className="App"
@@ -111,7 +60,12 @@ function App() {
       }
     >
       <globalStore.Provider
-        value={{ weatherDetails: weatherDetails, queryHandler: queryHandler }}
+        value={{
+          weatherDetails: weatherDetails,
+          queryHandler: queryHandler,
+          appTheme: [theme, setTheme],
+          appView: [view, setView],
+        }}
       >
         <Router>
           <NavbarComp query={(val) => setQuery(val)} />
@@ -122,13 +76,7 @@ function App() {
             <Route component={FourOFourScreen} />
           </Switch>
 
-          <BottomNavbarComp
-            show={view}
-            theme={theme}
-            mytheme={(theme) => setTheme(theme)}
-            hourly={(view) => setView(view)}
-            forecast={(view) => setView(view)}
-          />
+          <BottomNavbarComp />
         </Router>
       </globalStore.Provider>
     </div>
