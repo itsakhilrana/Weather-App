@@ -64,9 +64,9 @@ const WeatherComp = () => {
       </div>
 
       <div className="weatherDetails">
-        <p className="location">Humidity: {current.humidity}%</p>
-        <p className="location">Wind: {current.wind_speed}km/h</p>
-        <p className="location">Pressure: {current.pressure}</p>
+        <p className="location">Humidity: <span>{current.humidity}%</span></p>
+        <p className="location">Wind: <span>{current.wind_speed}km/h</span></p>
+        <p className="location">Pressure: <span>{current.pressure}</span></p>
       </div>
     </div>
   )

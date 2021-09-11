@@ -68,6 +68,10 @@
   justify-content: space-around;
 }
 
+.weatherComp .location span{
+  font-weight: bold;
+}
+
 .weatherDetails p {
   margin: 0px 10px;
 }

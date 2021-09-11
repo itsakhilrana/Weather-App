@@ -19,6 +19,7 @@ const HoursComp = () => {
             <img
               height="50"
               width="50"
+              alt="cloud"
               src={`http://openweathermap.org/img/wn/${val.weather[0].icon}@4x.png`}
             ></img>
             <div>
