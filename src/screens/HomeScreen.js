@@ -9,8 +9,6 @@ import HourlyComp from '../components/HourlyComp'
 import ForecastComp from '../components/ForecastComp'
 
 const HomeScreen = (props) => {
-  console.log(props.show)
-
   return (
     <div className="HomeScreen">
       <WeatherComp />

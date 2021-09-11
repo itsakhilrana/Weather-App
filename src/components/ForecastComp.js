@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import cloud from '../assets/cloud.svg'
+
 import { globalStore } from '../App'
 
 //Css
@@ -20,8 +20,8 @@ const ForecastComp = () => {
     'Monday',
   ]
 
-  const t = new Date()
-  const day = t.getDay()
+  //const t = new Date()
+  //const day = t.getDay()
 
   return (
     <div className="forecastComp">

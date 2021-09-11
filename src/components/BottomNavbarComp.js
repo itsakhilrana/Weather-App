@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { globalStore } from '../App'
+
 //Css
 import './BottomNavbarComp.css'
 

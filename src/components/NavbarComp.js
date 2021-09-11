@@ -5,11 +5,12 @@ import { globalStore } from '../App'
 
 //Css
 import './NavbarComp.css'
+
 const NavbarComp = (props) => {
   const history = useHistory()
   const [search, setSearch] = useState('')
   const { queryHandler } = useContext(globalStore)
-  console.log('Navbar', queryHandler)
+  
 
   return (
     <div className="header">

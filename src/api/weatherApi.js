@@ -16,9 +16,9 @@ export const fetchWeather = async (
   try {
     if (!query) {
       if (!pos.lat) {
-        await window.navigator.geolocation.getCurrentPosition(
-          savePositionToState
-        )
+        await new Promise(() => {
+          navigator.geolocation.getCurrentPosition(savePositionToState)
+        })
       }
 
       const { data } = await axios.get(URL, {

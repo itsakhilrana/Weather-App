@@ -27,9 +27,6 @@ function App() {
   const [view, setView] = useState(true)
   const [theme, setTheme] = useState(true)
 
-  console.log(query)
-  console.log('queryHandler', queryHandler)
-
   const savePositionToState = async (position) => {
     setPos({
       lat: position.coords.latitude,
@@ -50,7 +47,7 @@ function App() {
       setQuery,
       setQueryHandler
     )
-  }, [pos.lat, pos.long, query])
+  }, [pos, pos.lat, pos.long, query])
 
   return (
     <div

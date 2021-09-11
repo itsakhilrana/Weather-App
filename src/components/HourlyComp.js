@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
-import cloud from '../assets/cloud.svg'
+
 import { globalStore } from '../App'
 
 //Css

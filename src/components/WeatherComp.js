@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
-import cloudImg from '../assets/cloud.svg'
+
 import { globalStore } from '../App'
 //Css
 import './WeatherComp.css'
 
 const WeatherComp = () => {
-  const {weatherDetails, queryHandler} = useContext(globalStore)
-  console.log(weatherDetails)
+  const { weatherDetails, queryHandler } = useContext(globalStore)
+  
   let { timezone, current } = weatherDetails
 
   const days = [
@@ -41,12 +41,15 @@ const WeatherComp = () => {
   return (
     <div className="weatherComp">
       <div className="locationContainer">
-        <p className="location">{queryHandler.cityName ? queryHandler.cityName : timezone}</p>
+        <p className="location">
+          {queryHandler.cityName ? queryHandler.cityName : timezone}
+        </p>
       </div>
 
       <div className="dtContainer">
         <p className="time">
-          {moment(current.dt * 1000).format('HH:mm a')} {days[day]}, {date} {months[month]}
+          {moment(current.dt * 1000).format('HH:mm a')} {days[day]}, {date}{' '}
+          {months[month]}
         </p>
       </div>
 
@@ -64,9 +67,15 @@ const WeatherComp = () => {
       </div>
 
       <div className="weatherDetails">
-        <p className="location">Humidity: <span>{current.humidity}%</span></p>
-        <p className="location">Wind: <span>{current.wind_speed}km/h</span></p>
-        <p className="location">Pressure: <span>{current.pressure}</span></p>
+        <p className="location">
+          Humidity: <span>{current.humidity}%</span>
+        </p>
+        <p className="location">
+          Wind: <span>{current.wind_speed}km/h</span>
+        </p>
+        <p className="location">
+          Pressure: <span>{current.pressure}</span>
+        </p>
       </div>
     </div>
   )
