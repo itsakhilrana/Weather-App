@@ -17,16 +17,31 @@
   margin-left: 0px;
   margin-right: 10px;
 }
+
+.nightContainer{
+  margin-bottom: 10px;
+}
+
+.night{
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.morning{
+  font-size: 12px;
+ 
+}
 .forecastDays img {
   width: 80px;
   height: 80px;
-  margin-right: 25px;
+  margin-right: 20px;
 }
 .forecastDays .day {
-  font-size: 16px;
+  font-size: 12px;
 }
 .forecastDays .tempDay {
-  font-size: 30px;
+  
+  font-size: 20px;
   position: relative;
 }
 

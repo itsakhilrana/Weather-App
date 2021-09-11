@@ -4,15 +4,20 @@ import React from 'react'
 import './BottomNavbarComp.css'
 
 const BottomNavbarComp = (props) => {
+
+  
+console.log(props.show)
+
   return (
     <div className="bottomNavbarComp">
-      <div className="hours" onClick={() => props.hourly(true)}>
+      
+      <div className={props.show ? 'hours' : 'nohours'} onClick={() => props.hourly(true)}>
         48 Hours
       </div>
-      <div className="days" onClick={ () => props.forecast(false)}>
+      <div className={props.show ? 'nodays' : 'days'} onClick={ () => props.forecast(false)}>
         7 Days
       </div>
-      <div className="theme">Theme</div>
+      <div className="theme" onClick={()=>props.mytheme(!props.theme)}>Theme</div>
     </div>
   )
 }

@@ -1,172 +1,62 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import cloud from '../assets/cloud.svg'
+import { globalStore } from '../App'
+
 //Css
 import './ForecastComp.css'
+
 const ForecastComp = () => {
-    return (
-        <div className="forecastComp">
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Mon</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
+  const weatherDetails = useContext(globalStore)
+  const { daily } = weatherDetails
 
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
+  const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+    'Monday',
+  ]
 
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
+  const t = new Date()
+  const day = t.getDay()
 
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Tue</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
+  return (
+    <div className="forecastComp">
+      {daily.map((val, index) => (
+        <div className="forecastDays" key={index}>
+          <div>
+            <p className="day">{days[index]}</p>
+            <img
+              height="50"
+              width="50"
+              src={`http://openweathermap.org/img/wn//${val.weather[0].icon}@4x.png`}
+            ></img>
+          </div>
 
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Wed</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
-
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Thu</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
-
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Fri</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
-
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Sat</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
-
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="forecastDays">
-                <div>
-                  <p className="day">Sun</p>
-                  <img height="50" width="50" src={cloud}></img>
-                </div>
-
-                <div>
-                  <div div>
-                    <p className="night">Night- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="morning">Day- </p>
-                    <p className="tempDay">
-                      17<span className="symbol">&#176;C</span>{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div>
+            <div className="nightContainer">
+              <p className="night">Night- </p>
+              <p className="tempDay">
+                {val.temp.night}
+                <span className="symbol">&#176;C</span>
+              </p>
             </div>
-    )
+
+            <div>
+              <p className="morning">Day- </p>
+              <p className="tempDay">
+                {val.temp.day}
+                <span className="symbol">&#176;C</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default ForecastComp

@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header p{
+    font-size: 18px;
+    width: 50%;
+  }
+  
+  
+  input:focus {
+    outline: none;
+  }
+  
+  input::placeholder {
+    color: white;
+  }
+  
+  .searchContainer{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    
+  }
+  input {
+    border: 1px solid aliceblue;
+    border-radius: 5px;
+    width: 60%;
+    height: 40px;
+    padding: 5px;
+    background: transparent;
+    color: #f3f4f6;
+    margin-right: 5px;
+  }
+  
+  button {
+    background-color: rgba(240, 248, 255, 0.459);
+    height: 40px;
+    border: none;
+    padding: 5px;
+    width: 30%;
+    color: aliceblue;
+    border-radius: 5px;
+    
+  }

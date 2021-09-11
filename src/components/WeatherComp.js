@@ -1,34 +1,71 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import moment from 'moment'
 import cloudImg from '../assets/cloud.svg'
-
+import { globalStore } from '../App'
 //Css
 import './WeatherComp.css'
 
 const WeatherComp = () => {
+  const weatherDetails = useContext(globalStore)
+  let { timezone, current } = weatherDetails
+
+  const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ]
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
+  const t = new Date()
+  const month = t.getMonth()
+  const date = t.getDate()
+  const day = t.getDay()
+
   return (
     <div className="weatherComp">
       <div className="locationContainer">
-        <p className="location">Alentown, New Mexico</p>
+        <p className="location">{timezone}</p>
       </div>
 
       <div className="dtContainer">
-        <p className="time">12:30 Sat, 3 Aug</p>
+        <p className="time">
+          {moment(current.dt * 1000).format('HH:mm a')} {days[day]}, {date} {months[month]}
+        </p>
       </div>
 
       <div className="tempContainer">
         <p className="weatherIcon">
-          <img src={cloudImg} alt="couldImg"></img>
+          <img
+            src={`http://openweathermap.org/img/wn//${current.weather[0].icon}@4x.png`}
+            alt="couldImg"
+          ></img>
         </p>
         <p className="temp">
-          30 <span className="symbol">&#176;C</span>
-          <span className="description">overcast clouds</span>
+          {current.temp} <span className="symbol">&#176;C</span>
+          <span className="description">{current.weather[0].description}</span>
         </p>
       </div>
 
       <div className="weatherDetails">
-        <p className="location">Humidity: 84%</p>
-        <p className="location">Wind: 3 km/h</p>
-        <p className="location">Pressure: 0000</p>
+        <p className="location">Humidity: {current.humidity}%</p>
+        <p className="location">Wind: {current.wind_speed}km/h</p>
+        <p className="location">Pressure: {current.pressure}</p>
       </div>
     </div>
   )

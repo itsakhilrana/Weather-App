@@ -10,6 +10,10 @@
   border-radius: 5px;
   margin-right: 50px;
 }
+.locationContainer{
+  font-size: 20px;
+  font-weight: 500;
+}
 .dtContainer {
   display: flex;
 
@@ -18,6 +22,7 @@
 
 .dtContainer .time {
   font-size: 14px;
+  
   margin-top: 5px;
 }
 
@@ -41,7 +46,12 @@
 
 .tempContainer .temp {
   font-size: 60px;
+  font-weight: 500;
   position: relative;
+}
+
+.tempContainer .temp span{
+  font-weight: normal;
 }
 
 .weatherIcon img {
@@ -79,7 +89,7 @@
   }
 
   .weatherIcon img {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
   }
 }

@@ -23,6 +23,7 @@
   }
   
   .hourlyCard {
+    text-align: center;
     border-right: 1px solid rgb(230, 230, 230);
     margin-top: 5px;
     padding: 20px;
@@ -34,13 +35,15 @@
   }
   
   .hourlyTime {
-    font-size: 16px;
+    font-size: 12px;
   }
   .hourlyTemp {
     margin-top: 5px;
-    font-size: 20px;
+    font-size: 16px;
     position: relative;
+    margin-right: 10px;
   }
+  
   
   .hourlyTemp .symbol {
     position: absolute;
