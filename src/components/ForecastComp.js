@@ -9,6 +9,14 @@ const ForecastComp = () => {
   const { weatherDetails } = useContext(globalStore)
   const { daily } = weatherDetails
 
+  let arr = []
+
+  daily.forEach((val, index) => {
+    if (index > 0) {
+      arr.push(val)
+    }
+  })
+
   var day_of_week = new Date().getDay()
 
   var list = [
@@ -21,12 +29,13 @@ const ForecastComp = () => {
     'Saturday',
     'Sunday',
   ]
-  var sorted_list = list.slice(day_of_week).concat(list.slice(0, day_of_week))
-
+  var sorted_list = list
+    .slice(day_of_week + 1)
+    .concat(list.slice(0, day_of_week + 1))
 
   return (
     <div className="forecastComp">
-      {daily.map((val, index) => (
+      {arr.map((val, index) => (
         <div className="forecastDays" key={index}>
           <div>
             <p className="day">{sorted_list[index]}</p>
