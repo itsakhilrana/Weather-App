@@ -6,10 +6,13 @@ import { globalStore } from '../App'
 import './ForecastComp.css'
 
 const ForecastComp = () => {
-  const {weatherDetails} = useContext(globalStore)
+  const { weatherDetails } = useContext(globalStore)
   const { daily } = weatherDetails
 
-  const days = [
+  var day_of_week = new Date().getDay()
+
+  var list = [
+    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
@@ -17,18 +20,16 @@ const ForecastComp = () => {
     'Friday',
     'Saturday',
     'Sunday',
-    'Monday',
   ]
+  var sorted_list = list.slice(day_of_week).concat(list.slice(0, day_of_week))
 
-  //const t = new Date()
-  //const day = t.getDay()
 
   return (
     <div className="forecastComp">
       {daily.map((val, index) => (
         <div className="forecastDays" key={index}>
           <div>
-            <p className="day">{days[index]}</p>
+            <p className="day">{sorted_list[index]}</p>
             <img
               height="50"
               width="50"
@@ -37,7 +38,7 @@ const ForecastComp = () => {
             ></img>
           </div>
 
-          <div style={{marginRight:"10px"}}>
+          <div style={{ marginRight: '10px' }}>
             <div className="nightContainer">
               <p className="night">Night- </p>
               <p className="tempDay">
