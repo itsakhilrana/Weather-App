@@ -11,13 +11,14 @@ const WeatherComp = () => {
   let { timezone, current } = weatherDetails
 
   const days = [
+    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday',
+    
   ]
   const months = [
     'Jan',

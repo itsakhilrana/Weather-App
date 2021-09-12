@@ -12,6 +12,8 @@ const ForecastComp = () => {
   let arr = []
 
   daily.forEach((val, index) => {
+    
+    //removed the current day weather details by index > 0
     if (index > 0) {
       arr.push(val)
     }
@@ -27,11 +29,13 @@ const ForecastComp = () => {
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday',
+    
   ]
+
+  // day of week + 1 as we wont the future forcast of the upcoming days
   var sorted_list = list
-    .slice(day_of_week + 1)
-    .concat(list.slice(0, day_of_week + 1))
+    .slice(day_of_week+1)
+    .concat(list.slice(0, day_of_week+1))
 
   return (
     <div className="forecastComp">
